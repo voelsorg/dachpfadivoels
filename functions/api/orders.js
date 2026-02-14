@@ -25,6 +25,7 @@ const PRICE = 30;
 const NOTIFY_EMAIL = 'baustein@pfadivoels.at';
 const FROM_EMAIL = 'baustein@pfadivoels.at';
 const FROM_NAME = 'Pfadis Völs – Bausteinaktion';
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 async function sendMails(env, order, orderId, invoiceToken) {
   const versand = SHIP_COSTS[order.zustellung] ?? 0;
@@ -176,12 +177,30 @@ export async function onRequestPost(context) {
     return Response.json({ error: "Ungültige Anfrage" }, { status: 400 });
   }
 
+  const turnstileToken = body['cf-turnstile-response'];
+  if (!turnstileToken) {
+    return Response.json({ error: "CAPTCHA erforderlich" }, { status: 400 });
+  }
+  const turnstileResult = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      secret: env.TURNSTILE_SECRET,
+      response: turnstileToken,
+      remoteip: request.headers.get('CF-Connecting-IP'),
+    }),
+  });
+  const turnstileData = await turnstileResult.json();
+  if (!turnstileData.success) {
+    return Response.json({ error: "CAPTCHA-Überprüfung fehlgeschlagen" }, { status: 403 });
+  }
+
   const { vorname, nachname, email, anzahl, zustellung, adresse, land, anmerkung } = body;
 
   if (!vorname?.trim() || !nachname?.trim()) {
     return Response.json({ error: "Name ist Pflichtfeld" }, { status: 400 });
   }
-  if (!email?.trim() || !email.includes("@")) {
+  if (!email?.trim() || !EMAIL_REGEX.test(email.trim())) {
     return Response.json({ error: "Gültige E-Mail erforderlich" }, { status: 400 });
   }
   const n = parseInt(anzahl);

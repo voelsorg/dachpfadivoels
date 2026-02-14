@@ -140,6 +140,7 @@
     .fade-up.d2 { animation-delay: 0.2s; }
     .fade-up.d3 { animation-delay: 0.3s; }
   </style>
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body>
   <header class="site-header" id="header">
@@ -269,6 +270,7 @@
               <div class="order-summary-row total"><span>Gesamt</span><span id="sumTotal"></span></div>
             </div>
             <div class="form-group"><label for="anmerkung">Anmerkung (optional)</label><textarea id="anmerkung" name="anmerkung" placeholder="z. B. Gruppenname, Sonderw&uuml;nsche, &hellip;"></textarea></div>
+            <div class="cf-turnstile" data-sitekey="0x4AAAAAACckdm49eLEmo7A2" data-theme="light"></div>
             <button type="submit" class="submit-btn" id="submitBtn">Unverbindlich bestellen</button>
             <p class="form-note">Wir best&auml;tigen eure Bestellung per E-Mail und senden euch eine Rechnung zur Bezahlung per Bank&uuml;berweisung.</p>
           </form>
@@ -332,7 +334,7 @@
       if (d.zustellung !== 'abholung' && d.strasse) adresse = d.strasse + ', ' + d.plz + ' ' + d.ort;
       try {
         const res = await fetch('/api/orders', { method: 'POST', headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ vorname: d.vorname, nachname: d.nachname, email: d.email, anzahl: parseInt(d.anzahl), zustellung: d.zustellung, adresse, land: d.land || '', anmerkung: d.anmerkung || '' })
+          body: JSON.stringify({ vorname: d.vorname, nachname: d.nachname, email: d.email, anzahl: parseInt(d.anzahl), zustellung: d.zustellung, adresse, land: d.land || '', anmerkung: d.anmerkung || '', 'cf-turnstile-response': d['cf-turnstile-response'] })
         });
         if (!res.ok) { const err = await res.json(); throw new Error(err.error || 'Fehler beim Senden'); }
         this.style.display = 'none';
@@ -340,6 +342,7 @@
       } catch (err) {
         errEl.textContent = 'Fehler: ' + err.message + ' \u2013 Bitte versucht es erneut.';
         errEl.style.display = 'block'; btn.disabled = false; btn.textContent = 'Unverbindlich bestellen';
+        if(typeof turnstile!=='undefined')turnstile.reset();
       }
     });
   </script>

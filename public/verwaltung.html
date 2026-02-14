@@ -81,6 +81,7 @@
     @media print { .topbar,.app,.inv-actions{display:none!important} .inv-overlay{position:static!important;padding:0!important} }
     @media(max-width:768px){ .config-grid{grid-template-columns:1fr} .stats-row{grid-template-columns:1fr 1fr} .modal-row{grid-template-columns:1fr} }
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
 </head>
 <body>
   <div class="topbar">
@@ -156,6 +157,7 @@
     const SHIP={versand_at:5,versand_eu:11,versand_welt:0,abholung:0};
     const SHIP_LABEL={versand_at:'Versand AT',versand_eu:'Versand EU',versand_welt:'Versand Weltweit',abholung:'Selbstabholung'};
     let TOKEN='',orders=[],BANK={};
+    function esc(s){if(!s)return '';const d=document.createElement('div');d.textContent=s;return d.innerHTML;}
 
     function api(path,opts={}){
       opts.headers={...opts.headers,'Authorization':'Bearer '+TOKEN,'Content-Type':'application/json'};
@@ -194,7 +196,7 @@
         const sc=o.status==='bezahlt'?'badge-bezahlt':o.status==='versendet'?'badge-versendet':'badge-offen';
         const sl=o.status==='bezahlt'?'Bezahlt':o.status==='versendet'?'Versendet':'Offen';
         const d=o.created_at?new Date(o.created_at+'Z').toLocaleDateString('de-AT'):'–';
-        return `<tr><td>${o.id}</td><td>${d}</td><td><strong>${o.vorname} ${o.nachname}</strong></td><td>${o.email||'–'}</td><td>${o.anzahl}×</td><td>${SHIP_LABEL[o.zustellung]||o.zustellung}</td><td><strong>€ ${g},–</strong></td><td><span class="badge ${sc}">${sl}</span></td><td class="actions">${o.status==='offen'?`<button class="btn btn-green btn-sm" onclick="setStatus(${o.id},'bezahlt')" title="Bezahlt">✓</button>`:''}${o.status==='bezahlt'?`<button class="btn btn-sm" style="background:#1565C0;color:#fff" onclick="setStatus(${o.id},'versendet')" title="Versendet">📦</button>`:''}<button class="btn btn-secondary btn-sm" onclick="showInvoice(${o.id})" title="Rechnung">🧾</button><button class="btn btn-secondary btn-sm" onclick="sendInvoiceEmail(${o.id})" title="Rechnung senden">📧</button><button class="btn btn-secondary btn-sm" onclick="editOrder(${o.id})" title="Bearbeiten">✏️</button><button class="btn btn-secondary btn-sm" onclick="deleteOrder(${o.id})" title="Löschen">🗑️</button></td></tr>`;
+        return `<tr><td>${o.id}</td><td>${d}</td><td><strong>${esc(o.vorname)} ${esc(o.nachname)}</strong></td><td>${esc(o.email||'–')}</td><td>${o.anzahl}×</td><td>${SHIP_LABEL[o.zustellung]||esc(o.zustellung)}</td><td><strong>€ ${g},–</strong></td><td><span class="badge ${sc}">${sl}</span></td><td class="actions">${o.status==='offen'?`<button class="btn btn-green btn-sm" onclick="setStatus(${o.id},'bezahlt')" title="Bezahlt">✓</button>`:''}${o.status==='bezahlt'?`<button class="btn btn-sm" style="background:#1565C0;color:#fff" onclick="setStatus(${o.id},'versendet')" title="Versendet">📦</button>`:''}<button class="btn btn-secondary btn-sm" onclick="showInvoice(${o.id})" title="Rechnung">🧾</button><button class="btn btn-secondary btn-sm" onclick="sendInvoiceEmail(${o.id})" title="Rechnung senden">📧</button><button class="btn btn-secondary btn-sm" onclick="editOrder(${o.id})" title="Bearbeiten">✏️</button><button class="btn btn-secondary btn-sm" onclick="deleteOrder(${o.id})" title="Löschen">🗑️</button></td></tr>`;
       }).join('');
     }
     async function setStatus(id,status){await api('/api/orders/'+id,{method:'PATCH',body:JSON.stringify({status})});loadOrders();}
@@ -259,8 +261,8 @@
         <div class="inv-header"><div><img src="/logo-voels.png" alt="Pfadis Völs" style="height:auto;width:220px;display:block;margin-bottom:.75rem"><h2>Rechnung</h2><p style="font-size:.85rem;color:var(--grau-l);margin-top:.3rem">Bausteinaktion – Pfadis Völs</p></div>
         <div class="inv-meta"><p><strong>Nr.:</strong> ${nr}</p><p><strong>Datum:</strong> ${heute}</p></div></div>
         <div class="inv-addresses">
-          <div class="inv-addr"><h4>Von</h4><p><strong>${empf}</strong><br>Buch 1, 6176 Völs<br>baustein@pfadivoels.at</p></div>
-          <div class="inv-addr"><h4>An</h4><p><strong>${o.vorname} ${o.nachname}</strong><br>${o.email?o.email+'<br>':''}${o.adresse?(o.adresse+'<br>'):''}</p></div>
+          <div class="inv-addr"><h4>Von</h4><p><strong>${esc(empf)}</strong><br>Buch 1, 6176 Völs<br>baustein@pfadivoels.at</p></div>
+          <div class="inv-addr"><h4>An</h4><p><strong>${esc(o.vorname)} ${esc(o.nachname)}</strong><br>${o.email?esc(o.email)+'<br>':''}${o.adresse?(esc(o.adresse)+'<br>'):''}</p></div>
         </div>
         <table class="inv-table"><thead><tr><th style="width:7%">Pos.</th><th>Beschreibung</th><th class="right" style="width:12%">Menge</th><th class="right" style="width:16%">Einzelpreis</th><th class="right" style="width:14%">Betrag</th></tr></thead><tbody>
           <tr><td>1</td><td>Kunstdruck „BiPi" – A3, handsigniert &amp; nummeriert<br><small style="color:var(--grau-l)">Künstler: Markus Manfreda</small></td><td class="right">${o.anzahl}</td><td class="right">€ 30,00</td><td class="right">€ ${art.toFixed(2).replace('.',',')}</td></tr>
@@ -269,11 +271,11 @@
         </tbody></table>
         <div class="inv-payment"><h4>Zahlungsinformation – Banküberweisung</h4>
           <div class="inv-pay-grid"><table class="inv-pay-table">
-            <tr><td>Empfänger:</td><td>${empf}</td></tr>
-            <tr><td>IBAN:</td><td>${BANK.iban||''}</td></tr>
-            <tr><td>BIC:</td><td>${BANK.bic||''}</td></tr>
+            <tr><td>Empfänger:</td><td>${esc(empf)}</td></tr>
+            <tr><td>IBAN:</td><td>${esc(BANK.iban||'')}</td></tr>
+            <tr><td>BIC:</td><td>${esc(BANK.bic||'')}</td></tr>
             <tr><td>Betrag:</td><td>€ ${gesamt.toFixed(2).replace('.',',')}</td></tr>
-            <tr><td>Verwendungszweck:</td><td>${vzweck}</td></tr>
+            <tr><td>Verwendungszweck:</td><td>${esc(vzweck)}</td></tr>
           </table><div class="inv-qr" id="invoiceQR"></div></div></div>
         <div class="inv-footer"><p>Pfadfinder*innengruppe Völs · Buch 1, 6176 Völs · Mitglied der PPÖ · Landesverband Tirol · baustein.pfadivoels.at</p></div>
         <div class="inv-actions"><button class="btn btn-primary" onclick="window.print()">🖨️ Drucken / PDF</button>
@@ -282,9 +284,10 @@
       if(iban){
         const epc=['BCD','002','1','SCT',bic,empf,iban,'EUR'+gesamt.toFixed(2),'','',vzweck,''].join('\n');
         const qrEl=document.getElementById('invoiceQR');
+        const qr=qrcode(0,'M');qr.addData(epc);qr.make();
         const qrImg=document.createElement('img');
         qrImg.width=150;qrImg.height=150;qrImg.alt='EPC QR Code';
-        qrImg.src='https://api.qrserver.com/v1/create-qr-code/?size=150x150&data='+encodeURIComponent(epc);
+        qrImg.src=qr.createDataURL(4,0);
         qrEl.appendChild(qrImg);
         const s=document.createElement('small');s.textContent='QR-Code scannen zum Bezahlen';
         s.style.cssText='font-size:.7rem;color:var(--grau-l);margin-top:.3rem;display:block;text-align:center';qrEl.appendChild(s);
