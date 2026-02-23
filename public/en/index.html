@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bausteinaktion – Pfadis Völs</title>
-  <meta name="description" content="Unterstütze die Dachsanierung des Völser Pfadiheims mit einem exklusiven Kunstdruck von BiPi (Baden-Powell).">
+  <title>Fundraiser – Scouts V&ouml;ls</title>
+  <meta name="description" content="Support the roof renovation of the V&ouml;ls Scout Home with an exclusive art print of BiPi (Baden-Powell).">
   <link rel="alternate" hreflang="de" href="https://baustein.pfadivoels.at/">
   <link rel="alternate" hreflang="en" href="https://baustein.pfadivoels.at/en/">
   <link rel="alternate" hreflang="x-default" href="https://baustein.pfadivoels.at/">
@@ -29,7 +29,7 @@
     .nav-link { font-size: 0.85rem; font-weight: 600; text-decoration: none; padding: 0.4rem 1rem; border-radius: 2rem; border: 2px solid var(--pfadi-rot); color: var(--pfadi-rot); transition: all 0.25s; }
     .nav-link:hover { background: var(--pfadi-rot); color: #fff; }
     .hero { position: relative; min-height: 90vh; display: flex; align-items: center; justify-content: center; overflow: hidden; margin-top: 60px; }
-    .hero-bg { position: absolute; inset: 0; background: url('pfadiheim.jpeg') center/cover no-repeat; filter: brightness(0.3); }
+    .hero-bg { position: absolute; inset: 0; background: url('../pfadiheim.jpeg') center/cover no-repeat; filter: brightness(0.3); }
     .hero-overlay { position: absolute; inset: 0; background: linear-gradient(160deg, rgba(155,27,48,0.75) 0%, rgba(60,60,60,0.85) 100%); }
     .hero-content { position: relative; z-index: 2; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; max-width: 1100px; padding: 2rem 1.5rem; width: 100%; }
     .hero-text-side { color: #fff; }
@@ -148,20 +148,15 @@
 <body>
   <script>
     if (!document.cookie.includes('lang=')) {
-      if (!navigator.language.startsWith('de')) {
-        document.cookie = 'lang=en;path=/;max-age=31536000';
-        window.location.replace('/en/');
-      } else {
-        document.cookie = 'lang=de;path=/;max-age=31536000';
-      }
+      document.cookie = 'lang=en;path=/;max-age=31536000';
     }
   </script>
   <header class="site-header" id="header">
     <div class="header-inner">
-      <a href="#" class="site-title">Pfadis V&ouml;ls <span>&middot; Bausteinaktion</span></a>
+      <a href="/en/" class="site-title">Scouts V&ouml;ls <span>&middot; Fundraiser</span></a>
       <div style="display:flex;align-items:center;gap:0.75rem;">
-        <a href="#bestellen" class="nav-link">Jetzt bestellen</a>
-        <a href="/en/" class="nav-link" style="padding:0.4rem 0.6rem;font-size:0.78rem;" onclick="document.cookie='lang=en;path=/;max-age=31536000'">EN</a>
+        <a href="#order" class="nav-link">Order now</a>
+        <a href="/" class="nav-link" style="padding:0.4rem 0.6rem;font-size:0.78rem;" onclick="document.cookie='lang=de;path=/;max-age=31536000'">DE</a>
       </div>
     </div>
   </header>
@@ -170,81 +165,81 @@
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <div class="hero-text-side">
-        <span class="hero-badge fade-up">&diams; Pfadfinder*innengruppe V&ouml;ls, Tirol</span>
-        <h1 class="fade-up d1">Ein Baustein<br>f&uuml;r unser <em>Dach</em></h1>
-        <p class="hero-desc fade-up d2">Sichert euch einen exklusiven, handsignierten Kunstdruck (erste 100 St&uuml;ck) von <a title="Robert Baden-Powell" href="https://de.wikipedia.org/wiki/Robert_Baden-Powell">BiPi</a> und unterst&uuml;tzt damit die Dachsanierung unseres Pfadiheims.</p>
-        <a href="#bestellen" class="hero-cta fade-up d3">Druck bestellen</a>
+        <span class="hero-badge fade-up">&diams; Scout Group V&ouml;ls, Tyrol, Austria</span>
+        <h1 class="fade-up d1">A Building Block<br>for our <em>Roof</em></h1>
+        <p class="hero-desc fade-up d2">Get your exclusive, hand-signed art print (first 100 copies) of <a title="Robert Baden-Powell" href="https://en.wikipedia.org/wiki/Robert_Baden-Powell,_1st_Baron_Baden-Powell">BiPi</a> and support the roof renovation of our Scout Home.</p>
+        <a href="#order" class="hero-cta fade-up d3">Order print</a>
       </div>
       <div class="hero-image-side fade-up d2">
         <div class="hero-artwork">
-          <img src="bp-artwork.jpeg" alt="Kunstdruck BiPi (Baden-Powell) von Markus Manfreda">
-          <div class="art-badge">Limitiert &amp; Signiert</div>
+          <img src="../bp-artwork.jpeg" alt="Art print BiPi (Baden-Powell) by Markus Manfreda">
+          <div class="art-badge">Limited &amp; Signed</div>
           <div class="art-price">&euro; 30,&ndash;</div>
         </div>
       </div>
     </div>
   </section>
-  <section class="about" id="ueber-uns">
+  <section class="about" id="about">
     <div class="container">
       <div class="about-grid">
         <div class="about-text">
-          <span class="section-label">Warum wir eure Hilfe brauchen</span>
-          <h2>Unser Heim braucht ein neues Dach</h2>
-          <p>Im Jahr 2026 m&uuml;ssen wir das Dach unseres Pfadiheims in V&ouml;ls sanieren. Dabei kommen erhebliche Kosten auf unsere Gruppe zu.</p>
-          <p>Unser Haus mit seinen 300&nbsp;m&sup2; Dachfl&auml;che dient nicht nur der pfadfinderischen Arbeit der Gruppe V&ouml;ls, sondern wird auch regelm&auml;&szlig;ig f&uuml;r Landes- und Bundesverbandsveranstaltungen, PP&Ouml;-Ausbildungen sowie &ouml;sterreichweit von Gruppen f&uuml;r Lager genutzt &ndash; und stellt damit eine wichtige pfadfinderische Infrastruktur rund um Innsbruck dar.</p>
-          <p>Unterst&uuml;tzt uns bei unserem Vorhaben und holt euch einen exklusiven Baustein f&uuml;r euer Heim, f&uuml;r euch zu Hause oder als Geschenk f&uuml;r eure Liebsten!</p>
+          <span class="section-label">Why we need your help</span>
+          <h2>Our Scout Home needs a new roof</h2>
+          <p>In 2026, we need to renovate the roof of our Scout Home in V&ouml;ls, Tyrol. This comes with considerable costs for our group.</p>
+          <p>Our building with its 300&nbsp;m&sup2; roof area serves not only the scouting activities of our local group in V&ouml;ls, but is also regularly used for regional and national scouting events, leader training courses, and by scout groups from all over Austria for camps &ndash; making it an important piece of scouting infrastructure near Innsbruck.</p>
+          <p>Support us in our endeavour and get yourself an exclusive building block &ndash; for your scout home, for yourself at home, or as a gift for your loved ones!</p>
           <div class="stat-bar">
-            <div class="stat"><div class="stat-number">300</div><div class="stat-label">m&sup2; Dachfl&auml;che</div></div>
-            <div class="stat"><div class="stat-number">45+</div><div class="stat-label">Jahre Pfadiarbeit</div></div>
-            <div class="stat"><div class="stat-number">A3</div><div class="stat-label">Druckformat</div></div>
+            <div class="stat"><div class="stat-number">300</div><div class="stat-label">m&sup2; roof area</div></div>
+            <div class="stat"><div class="stat-number">45+</div><div class="stat-label">years of scouting</div></div>
+            <div class="stat"><div class="stat-number">A3</div><div class="stat-label">print format</div></div>
           </div>
         </div>
         <div class="about-image">
-          <img src="pfadiheim.jpeg" alt="Das Pfadiheim in V&ouml;ls, Tirol" loading="lazy">
+          <img src="../pfadiheim.jpeg" alt="The Scout Home in V&ouml;ls, Tyrol" loading="lazy">
         </div>
       </div>
     </div>
   </section>
-  <section class="artwork" id="kunstdruck">
+  <section class="artwork" id="artwork">
     <div class="container">
       <div class="artwork-grid">
         <div class="artwork-image">
-          <img src="bp-artwork.jpeg" alt="Kunstdruck BiPi (Baden-Powell) von Markus Manfreda">
+          <img src="../bp-artwork.jpeg" alt="Art print BiPi (Baden-Powell) by Markus Manfreda">
         </div>
         <div>
-          <span class="section-label" style="color: var(--accent-gold);">Der Kunstdruck</span>
-          <h2>&bdquo;Bipi&ldquo; &ndash; Baden-Powell<br>von Markus Manfreda</h2>
-          <p class="artwork-details">Markus Manfreda, ehemaliger V&ouml;lser Pfadi und Pfadipapa, hat uns dieses beeindruckende Portr&auml;t von <strong style="color:#fff">Bipi</strong> (B-P, Lord Baden-Powell &ndash; Gr&uuml;nder der Pfadfinderbewegung) zur Verf&uuml;gung gestellt. Der Druck ist als limitierte Auflage (erste 100 St&uuml;ck) exklusiv &uuml;ber diese Aktion erh&auml;ltlich.</p>
+          <span class="section-label" style="color: var(--accent-gold);">The Art Print</span>
+          <h2>&ldquo;BiPi&rdquo; &ndash; Baden-Powell<br>by Markus Manfreda</h2>
+          <p class="artwork-details">Markus Manfreda, a former Scout from V&ouml;ls and Scout dad, has created this striking portrait of <strong style="color:#fff">BiPi</strong> (B-P, Lord Baden-Powell &ndash; founder of the Scout Movement) for us. The print is available as a limited edition (first 100 copies) exclusively through this fundraiser.</p>
           <ul class="artwork-features">
-            <li>Format A3 &ndash; hochwertiger Kunstdruck</li>
-            <li>Handsigniert und nummeriert vom K&uuml;nstler (erste 100 St&uuml;ck)</li>
-            <li>Limitierte Auflage</li>
-            <li>Versand oder Selbstabholung m&ouml;glich</li>
+            <li>A3 format &ndash; high-quality art print</li>
+            <li>Hand-signed and numbered by the artist (first 100 copies)</li>
+            <li>Limited edition</li>
+            <li>Shipping or pick-up available</li>
           </ul>
           <div class="price-tag">
             <div class="price-amount">&euro; 30,&ndash;</div>
-            <div class="price-note">pro St&uuml;ck, zzgl. Versand</div>
+            <div class="price-note">per piece, plus shipping</div>
           </div>
-          <div class="artist-credit">K&uuml;nstler: Markus Manfreda &middot; <a href="https://www.manfreda-art.com/" target="_blank" rel="noopener">manfreda-art.com</a></div>
+          <div class="artist-credit">Artist: Markus Manfreda &middot; <a href="https://www.manfreda-art.com/" target="_blank" rel="noopener">manfreda-art.com</a></div>
         </div>
       </div>
     </div>
   </section>
-  <section class="order" id="bestellen">
+  <section class="order" id="order">
     <div class="container">
       <div class="order-layout">
         <div class="order-info">
-          <span class="section-label">So funktioniert's</span>
-          <h2>BiPi Druck bestellen</h2>
-          <p>F&uuml;llt das Formular aus &ndash; wir best&auml;tigen eure Bestellung per E-Mail und senden euch eine Rechnung mit QR-Code zur Bezahlung per Bank&uuml;berweisung.</p>
-          <p>Die Bilder werden gesammelt einmal im Monat versendet.</p>
+          <span class="section-label">How it works</span>
+          <h2>Order your BiPi print</h2>
+          <p>Fill out the form &ndash; we will confirm your order via email and send you an invoice with a QR code for payment by bank transfer.</p>
+          <p>Prints are shipped collectively once a month.</p>
           <div class="shipping-info">
-            <h3>Versandkosten</h3>
+            <h3>Shipping costs</h3>
             <table class="shipping-table">
-              <tr><td>Innerhalb &Ouml;sterreichs</td><td>&euro; 5,&ndash;</td></tr>
-              <tr><td>Innerhalb der EU</td><td>&euro; 11,&ndash;</td></tr>
-              <tr><td>Weltweit</td><td>auf Anfrage</td></tr>
-              <tr><td>Selbstabholung in Völs</td><td>kostenlos</td></tr>
+              <tr><td>Within Austria</td><td>&euro; 5,&ndash;</td></tr>
+              <tr><td>Within the EU</td><td>&euro; 11,&ndash;</td></tr>
+              <tr><td>Worldwide</td><td>on request</td></tr>
+              <tr><td>Pick-up in V&ouml;ls</td><td>free</td></tr>
             </table>
           </div>
         </div>
@@ -252,49 +247,49 @@
           <div class="form-error" id="formError"></div>
           <form id="orderForm">
             <div class="form-row">
-              <div class="form-group"><label for="vorname">Vorname *</label><input type="text" id="vorname" name="vorname" required></div>
-              <div class="form-group"><label for="nachname">Nachname *</label><input type="text" id="nachname" name="nachname" required></div>
+              <div class="form-group"><label for="vorname">First name *</label><input type="text" id="vorname" name="vorname" required></div>
+              <div class="form-group"><label for="nachname">Last name *</label><input type="text" id="nachname" name="nachname" required></div>
             </div>
-            <div class="form-group"><label for="email">E-Mail *</label><input type="email" id="email" name="email" required></div>
+            <div class="form-group"><label for="email">Email *</label><input type="email" id="email" name="email" required></div>
             <div class="form-group">
-              <label for="anzahl">Anzahl *</label>
+              <label for="anzahl">Quantity *</label>
               <select id="anzahl" name="anzahl" required>
-                <option value="">Bitte w&auml;hlen</option>
-                <option value="1">1 St&uuml;ck</option><option value="2">2 St&uuml;ck</option><option value="3">3 St&uuml;ck</option><option value="4">4 St&uuml;ck</option><option value="5">5 St&uuml;ck</option>
+                <option value="">Please select</option>
+                <option value="1">1 piece</option><option value="2">2 pieces</option><option value="3">3 pieces</option><option value="4">4 pieces</option><option value="5">5 pieces</option>
               </select>
             </div>
             <div class="form-group">
-              <label>Zustellung *</label>
+              <label>Delivery *</label>
               <div class="radio-group">
-                <div class="radio-option"><input type="radio" id="z_at" name="zustellung" value="versand_at" required><label for="z_at">&#x1F4E6; Versand AT<br><small>+ &euro; 5</small></label></div>
-                <div class="radio-option"><input type="radio" id="z_eu" name="zustellung" value="versand_eu"><label for="z_eu">&#x1F4E6; Versand EU<br><small>+ &euro; 11</small></label></div>
-                <div class="radio-option"><input type="radio" id="z_welt" name="zustellung" value="versand_welt"><label for="z_welt">&#x1F30D; Weltweit<br><small>auf Anfrage</small></label></div>
-                <div class="radio-option"><input type="radio" id="z_abh" name="zustellung" value="abholung"><label for="z_abh">&#x1F3E0; Abholung<br><small>kostenlos</small></label></div>
+                <div class="radio-option"><input type="radio" id="z_at" name="zustellung" value="versand_at" required><label for="z_at">&#x1F4E6; Austria<br><small>+ &euro; 5</small></label></div>
+                <div class="radio-option"><input type="radio" id="z_eu" name="zustellung" value="versand_eu"><label for="z_eu">&#x1F4E6; EU<br><small>+ &euro; 11</small></label></div>
+                <div class="radio-option"><input type="radio" id="z_welt" name="zustellung" value="versand_welt"><label for="z_welt">&#x1F30D; Intl.<br><small>on request</small></label></div>
+                <div class="radio-option"><input type="radio" id="z_abh" name="zustellung" value="abholung"><label for="z_abh">&#x1F3E0; Pick-up<br><small>free</small></label></div>
               </div>
             </div>
             <div class="conditional-fields" id="addressFields">
-              <div class="form-group"><label for="strasse">Stra&szlig;e und Hausnummer *</label><input type="text" id="strasse" name="strasse"></div>
+              <div class="form-group"><label for="strasse">Street and house number *</label><input type="text" id="strasse" name="strasse"></div>
               <div class="form-row">
-                <div class="form-group"><label for="plz">PLZ *</label><input type="text" id="plz" name="plz"></div>
-                <div class="form-group"><label for="ort">Ort *</label><input type="text" id="ort" name="ort"></div>
+                <div class="form-group"><label for="plz">Postal code *</label><input type="text" id="plz" name="plz"></div>
+                <div class="form-group"><label for="ort">City *</label><input type="text" id="ort" name="ort"></div>
               </div>
-              <div class="form-group"><label for="land">Land *</label><input type="text" id="land" name="land"></div>
+              <div class="form-group"><label for="land">Country *</label><input type="text" id="land" name="land"></div>
             </div>
             <div class="order-summary" id="orderSummary" style="display:none;">
               <div class="order-summary-row"><span id="sumArt"></span><span id="sumArtPrice"></span></div>
-              <div class="order-summary-row" id="sumShipRow" style="display:none;"><span>Versandkosten</span><span id="sumShipPrice"></span></div>
-              <div class="order-summary-row total"><span>Gesamt</span><span id="sumTotal"></span></div>
+              <div class="order-summary-row" id="sumShipRow" style="display:none;"><span>Shipping</span><span id="sumShipPrice"></span></div>
+              <div class="order-summary-row total"><span>Total</span><span id="sumTotal"></span></div>
             </div>
-            <div class="form-group"><label for="anmerkung">Anmerkung (optional)</label><textarea id="anmerkung" name="anmerkung" placeholder="z. B. Gruppenname, Sonderw&uuml;nsche, &hellip;"></textarea></div>
+            <div class="form-group"><label for="anmerkung">Notes (optional)</label><textarea id="anmerkung" name="anmerkung" placeholder="e.g. group name, special requests, &hellip;"></textarea></div>
             <div class="cf-turnstile" data-sitekey="0x4AAAAAACckdm49eLEmo7A2" data-theme="light"></div>
-            <button type="submit" class="submit-btn" id="submitBtn">Unverbindlich bestellen</button>
-            <p class="form-note">Wir best&auml;tigen eure Bestellung per E-Mail und senden euch eine Rechnung zur Bezahlung per Bank&uuml;berweisung.</p>
+            <button type="submit" class="submit-btn" id="submitBtn">Place order (non-binding)</button>
+            <p class="form-note">We will confirm your order via email and send you an invoice for payment by bank transfer.</p>
           </form>
           <div class="success-message" id="successMessage">
             <div class="success-icon">&#x1F389;</div>
-            <h3>Vielen Dank f&uuml;r eure Bestellung!</h3>
-            <p>Wir haben eure Anfrage erhalten und melden uns in K&uuml;rze per E-Mail mit der Rechnung.</p>
-            <p style="margin-top: 1rem; font-family: var(--font-accent); color: var(--pfadi-rot);">Gut Pfad!</p>
+            <h3>Thank you for your order!</h3>
+            <p>We have received your request and will get back to you shortly via email with the invoice.</p>
+            <p style="margin-top: 1rem; font-family: var(--font-accent); color: var(--pfadi-rot);">Yours in Scouting!</p>
           </div>
         </div>
       </div>
@@ -302,13 +297,13 @@
   </section>
   <footer class="site-footer">
     <div class="footer-inner">
-      <div class="footer-logo">Pfadfinder*innengruppe V&ouml;ls</div>
-      <p>Mitglied der Pfadfinder und Pfadfinderinnen &Ouml;sterreichs (PP&Ouml;) &middot; Landesverband Tirol</p>
+      <div class="footer-logo">Scout Group V&ouml;ls</div>
+      <p>Member of Pfadfinder und Pfadfinderinnen &Ouml;sterreichs (PP&Ouml;) &middot; Scouts Austria, Tyrol</p>
       <div class="footer-links">
         <a href="https://pfadivoels.at/" target="_blank" rel="noopener">pfadivoels.at</a>
         <a href="https://ppoe.at/" target="_blank" rel="noopener">ppoe.at</a>
-        <a href="https://pfadivoels.at/impressum/" target="_blank" rel="noopener">Impressum</a>
-        <a href="https://pfadivoels.at/anmeldung-datenschutz/" target="_blank" rel="noopener">Datenschutz</a>
+        <a href="https://pfadivoels.at/impressum/" target="_blank" rel="noopener">Legal notice</a>
+        <a href="https://pfadivoels.at/anmeldung-datenschutz/" target="_blank" rel="noopener">Privacy policy</a>
       </div>
     </div>
   </footer>
@@ -326,16 +321,16 @@
       const needAddr = z && z.value !== 'abholung';
       addressFields.classList.toggle('visible', needAddr);
       addressInputs.forEach(i => i.required = needAddr);
-      if (z && z.value === 'versand_at') { const l = document.getElementById('land'); if (!l.value) l.value = '\u00d6sterreich'; }
+      if (z && z.value === 'versand_at') { const l = document.getElementById('land'); if (!l.value) l.value = 'Austria'; }
       const sum = document.getElementById('orderSummary');
       if (n > 0 && z) {
         sum.style.display = 'block';
         const art = n * PRICE;
-        document.getElementById('sumArt').textContent = n + '\u00d7 Kunstdruck BiPi';
+        document.getElementById('sumArt').textContent = n + '\u00d7 Art Print BiPi';
         document.getElementById('sumArtPrice').textContent = '\u20ac ' + art + ',\u2013';
         const sr = document.getElementById('sumShipRow'), sc = SHIP[z.value];
         if (sc > 0) { sr.style.display = 'flex'; document.getElementById('sumShipPrice').textContent = '\u20ac ' + sc + ',\u2013'; document.getElementById('sumTotal').textContent = '\u20ac ' + (art + sc) + ',\u2013'; }
-        else if (sc === null) { sr.style.display = 'flex'; document.getElementById('sumShipPrice').textContent = 'auf Anfrage'; document.getElementById('sumTotal').textContent = '\u20ac ' + art + ',\u2013 + Versand'; }
+        else if (sc === null) { sr.style.display = 'flex'; document.getElementById('sumShipPrice').textContent = 'on request'; document.getElementById('sumTotal').textContent = '\u20ac ' + art + ',\u2013 + shipping'; }
         else { sr.style.display = 'none'; document.getElementById('sumTotal').textContent = '\u20ac ' + art + ',\u2013'; }
       } else { sum.style.display = 'none'; }
     }
@@ -344,7 +339,7 @@
     document.getElementById('orderForm').addEventListener('submit', async function(e) {
       e.preventDefault();
       const btn = document.getElementById('submitBtn'), errEl = document.getElementById('formError');
-      errEl.style.display = 'none'; btn.disabled = true; btn.textContent = 'Wird gesendet \u2026';
+      errEl.style.display = 'none'; btn.disabled = true; btn.textContent = 'Sending \u2026';
       const d = Object.fromEntries(new FormData(this).entries());
       let adresse = '';
       if (d.zustellung !== 'abholung' && d.strasse) adresse = d.strasse + ', ' + d.plz + ' ' + d.ort;
@@ -352,12 +347,12 @@
         const res = await fetch('/api/orders', { method: 'POST', headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ vorname: d.vorname, nachname: d.nachname, email: d.email, anzahl: parseInt(d.anzahl), zustellung: d.zustellung, adresse, land: d.land || '', anmerkung: d.anmerkung || '', 'cf-turnstile-response': d['cf-turnstile-response'] })
         });
-        if (!res.ok) { const err = await res.json(); throw new Error(err.error || 'Fehler beim Senden'); }
+        if (!res.ok) { const err = await res.json(); throw new Error(err.error || 'Error while sending'); }
         this.style.display = 'none';
         document.getElementById('successMessage').classList.add('visible');
       } catch (err) {
-        errEl.textContent = 'Fehler: ' + err.message + ' \u2013 Bitte versucht es erneut.';
-        errEl.style.display = 'block'; btn.disabled = false; btn.textContent = 'Unverbindlich bestellen';
+        errEl.textContent = 'Error: ' + err.message + ' \u2013 Please try again.';
+        errEl.style.display = 'block'; btn.disabled = false; btn.textContent = 'Place order (non-binding)';
         if(typeof turnstile!=='undefined')turnstile.reset();
       }
     });

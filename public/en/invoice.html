@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rechnung – Bausteinaktion Pfadis Völs</title>
+  <title>Invoice – Scouts V&ouml;ls Fundraiser</title>
   <link rel="alternate" hreflang="de" href="https://baustein.pfadivoels.at/rechnung.html">
   <link rel="alternate" hreflang="en" href="https://baustein.pfadivoels.at/en/invoice.html">
   <link rel="alternate" hreflang="x-default" href="https://baustein.pfadivoels.at/rechnung.html">
@@ -38,19 +38,19 @@
     .btn-primary{background:var(--pfadi-rot);color:#fff}.btn-primary:hover{background:var(--pfadi-rot-light)}
     .status-msg{max-width:500px;margin:4rem auto;text-align:center;font-size:1rem;color:var(--grau-l)}
     .status-msg h2{color:var(--pfadi-rot);margin-bottom:1rem}
-    @media print { .inv-actions{display:none!important} body{padding:0} }
+    @media print { .inv-actions{display:none!important} .lang-switch{display:none!important} body{padding:0} }
     @media(max-width:600px){ .inv-addresses{grid-template-columns:1fr} .inv-header{flex-direction:column;gap:1rem} }
   </style>
   <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
 </head>
 <body>
-  <div style="text-align:right;max-width:700px;margin:0 auto;padding:0.5rem 0 0"><a href="javascript:void(0)" id="langSwitch" style="font-family:var(--font);font-size:.8rem;font-weight:600;color:var(--pfadi-rot);text-decoration:none;padding:.3rem .6rem;border:2px solid var(--pfadi-rot);border-radius:2rem" onclick="var t=new URLSearchParams(location.search).get('token');location.href='/en/invoice.html?token='+encodeURIComponent(t)">EN</a></div>
-  <div id="loading" class="status-msg"><p>Rechnung wird geladen...</p></div>
-  <div id="error" class="status-msg" style="display:none"><h2>Rechnung nicht gefunden</h2><p>Der Link ist ungültig oder die Bestellung existiert nicht mehr.</p></div>
+  <div class="lang-switch" style="text-align:right;max-width:700px;margin:0 auto;padding:0.5rem 0 0"><a href="javascript:void(0)" style="font-family:var(--font);font-size:.8rem;font-weight:600;color:var(--pfadi-rot);text-decoration:none;padding:.3rem .6rem;border:2px solid var(--pfadi-rot);border-radius:2rem" onclick="var t=new URLSearchParams(location.search).get('token');location.href='/rechnung.html?token='+encodeURIComponent(t)">DE</a></div>
+  <div id="loading" class="status-msg"><p>Loading invoice...</p></div>
+  <div id="error" class="status-msg" style="display:none"><h2>Invoice not found</h2><p>The link is invalid or the order no longer exists.</p></div>
   <div id="invoice" class="inv-wrap" style="display:none"></div>
   <script>
     const PRICE=30;
-    const SHIP_LABEL={versand_at:'Versand AT',versand_eu:'Versand EU',versand_welt:'Versand Weltweit',abholung:'Selbstabholung'};
+    const SHIP_LABEL={versand_at:'Shipping AT',versand_eu:'Shipping EU',versand_welt:'Worldwide Shipping',abholung:'Pick-up'};
     function esc(s){if(!s)return '';const d=document.createElement('div');d.textContent=s;return d.innerHTML;}
 
     async function loadInvoice(){
@@ -77,34 +77,34 @@
       const bank=o.bank||{};
       const art=o.anzahl*PRICE,gesamt=art+(o.versand||0);
       const nr='BA-2026-'+String(o.id).padStart(3,'0');
-      const heute=o.created_at?new Date(o.created_at+'Z').toLocaleDateString('de-AT'):new Date().toLocaleDateString('de-AT');
+      const heute=o.created_at?new Date(o.created_at+'Z').toLocaleDateString('en-GB'):new Date().toLocaleDateString('en-GB');
       const empf=bank.name||'';
       const iban=(bank.iban||'').replace(/\s/g,''),bic=(bank.bic||'').replace(/\s/g,'');
       const vzweck='Bausteinaktion '+nr+' '+o.vorname+' '+o.nachname;
 
       const el=document.getElementById('invoice');
       el.innerHTML=`
-        <div class="inv-header"><div><img src="/logo-voels.png" alt="Pfadis Völs" style="height:auto;width:220px;display:block;margin-bottom:.75rem"><h2>Rechnung</h2><p style="font-size:.85rem;color:var(--grau-l);margin-top:.3rem">Bausteinaktion – Pfadis Völs</p></div>
-        <div class="inv-meta"><p><strong>Nr.:</strong> ${nr}</p><p><strong>Datum:</strong> ${heute}</p></div></div>
+        <div class="inv-header"><div><img src="/logo-voels.png" alt="Scouts V&ouml;ls" style="height:auto;width:220px;display:block;margin-bottom:.75rem"><h2>Invoice</h2><p style="font-size:.85rem;color:var(--grau-l);margin-top:.3rem">Fundraiser – Scouts V&ouml;ls</p></div>
+        <div class="inv-meta"><p><strong>No.:</strong> ${nr}</p><p><strong>Date:</strong> ${heute}</p></div></div>
         <div class="inv-addresses">
-          <div class="inv-addr"><h4>Von</h4><p><strong>${esc(empf)}</strong><br>Buch 1, 6176 Völs<br>baustein@pfadivoels.at</p></div>
-          <div class="inv-addr"><h4>An</h4><p><strong>${esc(o.vorname)} ${esc(o.nachname)}</strong><br>${o.email?esc(o.email)+'<br>':''}${o.adresse?(esc(o.adresse)+'<br>'):''}</p></div>
+          <div class="inv-addr"><h4>From</h4><p><strong>${esc(empf)}</strong><br>Buch 1, 6176 V&ouml;ls, Austria<br>baustein@pfadivoels.at</p></div>
+          <div class="inv-addr"><h4>To</h4><p><strong>${esc(o.vorname)} ${esc(o.nachname)}</strong><br>${o.email?esc(o.email)+'<br>':''}${o.adresse?(esc(o.adresse)+'<br>'):''}</p></div>
         </div>
-        <table class="inv-table"><thead><tr><th style="width:7%">Pos.</th><th>Beschreibung</th><th class="right" style="width:12%">Menge</th><th class="right" style="width:16%">Einzelpreis</th><th class="right" style="width:14%">Betrag</th></tr></thead><tbody>
-          <tr><td>1</td><td>Kunstdruck „BiPi" – A3, handsigniert &amp; nummeriert<br><small style="color:var(--grau-l)">Künstler: Markus Manfreda</small></td><td class="right">${o.anzahl}</td><td class="right">€ 30,00</td><td class="right">€ ${art.toFixed(2).replace('.',',')}</td></tr>
-          ${o.versand>0?`<tr><td>2</td><td>${SHIP_LABEL[o.zustellung]||'Versand'}</td><td class="right">1</td><td class="right">€ ${o.versand.toFixed(2).replace('.',',')}</td><td class="right">€ ${o.versand.toFixed(2).replace('.',',')}</td></tr>`:''}
-          <tr class="inv-total"><td colspan="4"><strong>Gesamtbetrag</strong></td><td class="right"><strong>€ ${gesamt.toFixed(2).replace('.',',')}</strong></td></tr>
+        <table class="inv-table"><thead><tr><th style="width:7%">Pos.</th><th>Description</th><th class="right" style="width:12%">Qty</th><th class="right" style="width:16%">Unit price</th><th class="right" style="width:14%">Amount</th></tr></thead><tbody>
+          <tr><td>1</td><td>Art print &ldquo;BiPi&rdquo; &ndash; A3, hand-signed &amp; numbered<br><small style="color:var(--grau-l)">Artist: Markus Manfreda</small></td><td class="right">${o.anzahl}</td><td class="right">&euro; 30.00</td><td class="right">&euro; ${art.toFixed(2)}</td></tr>
+          ${o.versand>0?`<tr><td>2</td><td>${SHIP_LABEL[o.zustellung]||'Shipping'}</td><td class="right">1</td><td class="right">&euro; ${o.versand.toFixed(2)}</td><td class="right">&euro; ${o.versand.toFixed(2)}</td></tr>`:''}
+          <tr class="inv-total"><td colspan="4"><strong>Total</strong></td><td class="right"><strong>&euro; ${gesamt.toFixed(2)}</strong></td></tr>
         </tbody></table>
-        <div class="inv-payment"><h4>Zahlungsinformation – Banküberweisung</h4>
+        <div class="inv-payment"><h4>Payment information – Bank transfer</h4>
           <div class="inv-pay-grid"><table class="inv-pay-table">
-            <tr><td>Empfänger:</td><td>${esc(empf)}</td></tr>
+            <tr><td>Recipient:</td><td>${esc(empf)}</td></tr>
             <tr><td>IBAN:</td><td>${esc(bank.iban||'')}</td></tr>
             <tr><td>BIC:</td><td>${esc(bank.bic||'')}</td></tr>
-            <tr><td>Betrag:</td><td>€ ${gesamt.toFixed(2).replace('.',',')}</td></tr>
-            <tr><td>Verwendungszweck:</td><td>${esc(vzweck)}</td></tr>
+            <tr><td>Amount:</td><td>&euro; ${gesamt.toFixed(2)}</td></tr>
+            <tr><td>Reference:</td><td>${esc(vzweck)}</td></tr>
           </table><div class="inv-qr" id="invoiceQR"></div></div></div>
-        <div class="inv-footer"><p>Pfadfinder*innengruppe Völs · Buch 1, 6176 Völs · Mitglied der PPÖ · Landesverband Tirol · baustein.pfadivoels.at</p></div>
-        <div class="inv-actions"><button class="btn btn-primary" onclick="window.print()">Drucken / PDF</button></div>`;
+        <div class="inv-footer"><p>Scout Group V&ouml;ls &middot; Buch 1, 6176 V&ouml;ls, Austria &middot; Member of PP&Ouml; &middot; Scouts Austria, Tyrol &middot; baustein.pfadivoels.at</p></div>
+        <div class="inv-actions"><button class="btn btn-primary" onclick="window.print()">Print / PDF</button></div>`;
 
       document.getElementById('loading').style.display='none';
       el.style.display='block';
@@ -117,7 +117,7 @@
       qrImg.width=150;qrImg.height=150;qrImg.alt='EPC QR Code';
       qrImg.src=qr.createDataURL(4,0);
       qrEl.appendChild(qrImg);
-      const s=document.createElement('small');s.textContent='QR-Code scannen zum Bezahlen';
+      const s=document.createElement('small');s.textContent='Scan QR code to pay';
       s.style.cssText='font-size:.7rem;color:var(--grau-l);margin-top:.3rem;display:block;text-align:center';qrEl.appendChild(s);
     }
 
