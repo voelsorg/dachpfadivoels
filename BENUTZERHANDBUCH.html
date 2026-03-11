@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Benutzerhandbuch – Bausteinaktion Verwaltung</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="" />
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Benutzerhandbuch – Bausteinaktion Verwaltung</h1>
+</header>
+<h1 id="benutzerhandbuch-bausteinaktion-verwaltung">Benutzerhandbuch –
+Bausteinaktion Verwaltung</h1>
+<h2 id="anmelden">Anmelden</h2>
+<ol type="1">
+<li>Öffne <strong>baustein.pfadivoels.at/verwaltung.html</strong></li>
+<li>Gib das Admin-Passwort ein und klicke
+<strong>Einloggen</strong></li>
+</ol>
+<p>Das Passwort bleibt für die Browser-Sitzung gespeichert (bis du den
+Tab schließt).</p>
+<hr />
+<h2 id="übersicht">Übersicht</h2>
+<p>Nach dem Login siehst du:</p>
+<ul>
+<li><strong>Statistiken</strong> oben: Anzahl Bestellungen, bestellte
+Drucke, bezahlte Bestellungen, Einnahmen</li>
+<li><strong>Bestelltabelle</strong> mit allen Bestellungen (neueste
+zuerst)</li>
+<li><strong>Suchfeld</strong> zum Filtern nach Name, E-Mail oder
+Anmerkung</li>
+</ul>
+<hr />
+<h2 id="bestellungen-verwalten">Bestellungen verwalten</h2>
+<p>Jede Bestellung hat rechts Aktions-Buttons:</p>
+<table>
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 32%" />
+<col style="width: 44%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Button</th>
+<th>Bedeutung</th>
+<th>Wann sichtbar</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>✓</strong></td>
+<td>Als <strong>bezahlt</strong> markieren</td>
+<td>Nur bei offenen Bestellungen</td>
+</tr>
+<tr class="even">
+<td><strong>📦</strong></td>
+<td>Als <strong>versendet</strong> markieren</td>
+<td>Nur bei bezahlten Bestellungen</td>
+</tr>
+<tr class="odd">
+<td><strong>🧾</strong></td>
+<td>Rechnung <strong>anzeigen/drucken</strong></td>
+<td>Immer</td>
+</tr>
+<tr class="even">
+<td><strong>📧</strong></td>
+<td>Rechnungs-E-Mail <strong>senden</strong></td>
+<td>Immer</td>
+</tr>
+<tr class="odd">
+<td><strong>✏️</strong></td>
+<td>Bestellung <strong>bearbeiten</strong></td>
+<td>Immer</td>
+</tr>
+<tr class="even">
+<td><strong>🗑️</strong></td>
+<td>Bestellung <strong>löschen</strong></td>
+<td>Immer</td>
+</tr>
+</tbody>
+</table>
+<h3 id="status-ablauf-einer-bestellung">Status-Ablauf einer
+Bestellung</h3>
+<pre><code>Offen  →  Bezahlt  →  Versendet
+ (✓)        (📦)</code></pre>
+<hr />
+<h2 id="rechnung-anzeigen-drucken">Rechnung anzeigen / drucken (🧾)</h2>
+<ol type="1">
+<li>Klicke <strong>🧾</strong> bei der gewünschten Bestellung</li>
+<li>Die Rechnung wird mit QR-Code zum Bezahlen angezeigt</li>
+<li>Klicke <strong>Drucken / PDF</strong> um sie zu drucken oder als PDF
+zu speichern</li>
+<li>Zum Schließen: <strong>Schließen</strong> klicken oder
+<strong>Esc</strong> drücken</li>
+</ol>
+<hr />
+<h2 id="rechnungs-e-mail-senden">Rechnungs-E-Mail senden (📧)</h2>
+<p>Sendet dem Kunden eine E-Mail mit einem Link zu seiner
+Online-Rechnung (inkl. QR-Code für Banküberweisung).</p>
+<ol type="1">
+<li>Klicke <strong>📧</strong> bei der gewünschten Bestellung</li>
+<li>Bestätige mit <strong>OK</strong></li>
+<li>Der Kunde erhält eine zweisprachige E-Mail (Deutsch + Englisch) mit
+dem Rechnungslink</li>
+</ol>
+<p><strong>Hinweis:</strong> Der Button kann beliebig oft geklickt
+werden – die E-Mail wird jedes Mal neu gesendet (z.B. wenn der Kunde sie
+nicht bekommen hat).</p>
+<hr />
+<h2 id="weltweit-bestellungen-sonderfall">Weltweit-Bestellungen
+(Sonderfall)</h2>
+<p>Bei weltweitem Versand sind die Versandkosten <strong>nicht
+automatisch bekannt</strong>. Der Ablauf ist:</p>
+<h3 id="bestellung-geht-ein">1. Bestellung geht ein</h3>
+<p>Der Kunde bekommt eine Bestätigungs-E-Mail <strong>ohne
+Kosten</strong> mit dem Hinweis: <em>„Die Versandkosten werden wir dir
+in einer separaten E-Mail mitteilen.”</em></p>
+<h3 id="versandkosten-eintragen">2. Versandkosten eintragen</h3>
+<ol type="1">
+<li>Klicke <strong>✏️</strong> (Bearbeiten) bei der Bestellung</li>
+<li>Trage die ermittelten <strong>Versandkosten</strong> im Feld
+„Versandkosten (€)” ein</li>
+<li>Klicke <strong>Speichern</strong></li>
+</ol>
+<h3 id="rechnungs-e-mail-senden-1">3. Rechnungs-E-Mail senden</h3>
+<ol type="1">
+<li>Klicke <strong>📧</strong> bei der Bestellung</li>
+<li>Der Kunde erhält jetzt die Rechnung mit den korrekten
+Versandkosten</li>
+</ol>
+<p><strong>Wichtig:</strong> Der 📧-Button blockiert bei
+Weltweit-Bestellungen solange die Versandkosten noch 0 sind – damit
+nicht versehentlich eine Rechnung ohne Versandkosten verschickt
+wird.</p>
+<hr />
+<h2 id="bestellung-bearbeiten">Bestellung bearbeiten (✏️)</h2>
+<p>Hier kannst du alle Felder einer Bestellung ändern:</p>
+<ul>
+<li><strong>Name, E-Mail, Anzahl</strong> – Kundendaten korrigieren</li>
+<li><strong>Zustellung</strong> – Versandart ändern (Versandkosten
+werden automatisch angepasst)</li>
+<li><strong>Stückpreis (€)</strong> – Preis pro Druck anpassen
+(Mindestpreis: € 30). Nützlich wenn jemand mehr spenden möchte (z.B. €
+100 statt € 30)</li>
+<li><strong>Versandkosten</strong> – Manuell überschreiben (besonders
+für Weltweit-Bestellungen)</li>
+<li><strong>Adresse</strong> – Lieferadresse</li>
+<li><strong>Status</strong> – Offen / Bezahlt / Versendet</li>
+<li><strong>Anmerkung</strong> – Interne Notizen</li>
+</ul>
+<hr />
+<h2 id="neue-bestellung-manuell-anlegen">Neue Bestellung manuell
+anlegen</h2>
+<ol type="1">
+<li>Klicke <strong>+ Neue Bestellung</strong></li>
+<li>Fülle die Felder aus (Vor- und Nachname sind Pflicht, E-Mail ist
+optional)</li>
+<li>Bei Bedarf den <strong>Stückpreis</strong> anpassen (z.B. € 100 für
+eine größere Spende)</li>
+<li>Klicke <strong>Speichern</strong></li>
+</ol>
+<p>Wenn eine E-Mail-Adresse angegeben ist, werden Bestätigungs-E-Mails
+automatisch verschickt. Ohne E-Mail wird die Bestellung nur intern
+gespeichert.</p>
+<hr />
+<h2 id="csv-export">CSV Export</h2>
+<p>Klicke <strong>📥 CSV Export</strong> um alle Bestellungen als
+CSV-Datei herunterzuladen (z.B. für Excel oder die Buchhaltung).</p>
+<hr />
+<h2 id="was-der-kunde-sieht">Was der Kunde sieht</h2>
+<h3 id="bei-bestellung-automatisch">Bei Bestellung (automatisch)</h3>
+<ul>
+<li><strong>Österreich / EU / Abholung:</strong> E-Mail mit
+Bestelldetails, Kosten und Link zur Online-Rechnung</li>
+<li><strong>Weltweit:</strong> E-Mail mit Bestelldetails, <em>ohne</em>
+Kosten, Hinweis auf separate E-Mail</li>
+</ul>
+<h3 id="bei-rechnungs-e-mail--button">Bei Rechnungs-E-Mail
+(📧-Button)</h3>
+<ul>
+<li>E-Mail mit Kostenübersicht und Link zur Online-Rechnung</li>
+<li>Die Online-Rechnung zeigt: Positionen, Gesamtbetrag, Bankdaten,
+QR-Code zum Bezahlen</li>
+</ul>
+<p>Alle Kunden-E-Mails sind <strong>zweisprachig</strong> (Deutsch +
+Englisch).</p>
+</body>
+</html>

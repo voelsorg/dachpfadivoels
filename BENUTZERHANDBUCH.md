@@ -88,6 +88,7 @@ Hier kannst du alle Felder einer Bestellung ändern:
 
 - **Name, E-Mail, Anzahl** – Kundendaten korrigieren
 - **Zustellung** – Versandart ändern (Versandkosten werden automatisch angepasst)
+- **Stückpreis (€)** – Preis pro Druck anpassen (Mindestpreis: € 30). Nützlich wenn jemand mehr spenden möchte (z.B. € 100 statt € 30)
 - **Versandkosten** – Manuell überschreiben (besonders für Weltweit-Bestellungen)
 - **Adresse** – Lieferadresse
 - **Status** – Offen / Bezahlt / Versendet
@@ -98,10 +99,11 @@ Hier kannst du alle Felder einer Bestellung ändern:
 ## Neue Bestellung manuell anlegen
 
 1. Klicke **+ Neue Bestellung**
-2. Fülle die Felder aus (Vor- und Nachname sind Pflicht)
-3. Klicke **Speichern**
+2. Fülle die Felder aus (Vor- und Nachname sind Pflicht, E-Mail ist optional)
+3. Bei Bedarf den **Stückpreis** anpassen (z.B. € 100 für eine größere Spende)
+4. Klicke **Speichern**
 
-Die Bestätigungs-E-Mails werden automatisch verschickt.
+Wenn eine E-Mail-Adresse angegeben ist, werden Bestätigungs-E-Mails automatisch verschickt. Ohne E-Mail wird die Bestellung nur intern gespeichert.
 
 ---
 
