@@ -166,7 +166,7 @@ npx wrangler pages secret put ADMIN_TOKEN --project-name baustein-pfadivoels
 
 Du wirst nach dem Wert gefragt – tippe dein gewünschtes Admin-Passwort ein, z.B.:
 ```
-? Enter a secret value: › GutPfad2026!
+? Enter a secret value: › <dein-sicheres-passwort>
 ```
 
 (Die Eingabe ist unsichtbar, das ist normal.)
