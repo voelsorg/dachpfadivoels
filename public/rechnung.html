@@ -75,7 +75,7 @@
 
     function renderInvoice(o){
       const bank=o.bank||{};
-      const art=o.anzahl*PRICE,gesamt=art+(o.versand||0);
+      const up=o.preis||PRICE,art=o.anzahl*up,gesamt=art+(o.versand||0);
       const nr='BA-2026-'+String(o.id).padStart(3,'0');
       const heute=o.created_at?new Date(o.created_at+'Z').toLocaleDateString('de-AT'):new Date().toLocaleDateString('de-AT');
       const empf=bank.name||'';
@@ -91,7 +91,7 @@
           <div class="inv-addr"><h4>An</h4><p><strong>${esc(o.vorname)} ${esc(o.nachname)}</strong><br>${o.email?esc(o.email)+'<br>':''}${o.adresse?(esc(o.adresse)+'<br>'):''}</p></div>
         </div>
         <table class="inv-table"><thead><tr><th style="width:7%">Pos.</th><th>Beschreibung</th><th class="right" style="width:12%">Menge</th><th class="right" style="width:16%">Einzelpreis</th><th class="right" style="width:14%">Betrag</th></tr></thead><tbody>
-          <tr><td>1</td><td>Kunstdruck „BiPi" – A3, handsigniert &amp; nummeriert<br><small style="color:var(--grau-l)">Künstler: Markus Manfreda</small></td><td class="right">${o.anzahl}</td><td class="right">€ 30,00</td><td class="right">€ ${art.toFixed(2).replace('.',',')}</td></tr>
+          <tr><td>1</td><td>Kunstdruck „BiPi" – A3, handsigniert &amp; nummeriert<br><small style="color:var(--grau-l)">Künstler: Markus Manfreda</small></td><td class="right">${o.anzahl}</td><td class="right">€ ${up.toFixed(2).replace('.',',')}</td><td class="right">€ ${art.toFixed(2).replace('.',',')}</td></tr>
           ${o.versand>0?`<tr><td>2</td><td>${SHIP_LABEL[o.zustellung]||'Versand'}</td><td class="right">1</td><td class="right">€ ${o.versand.toFixed(2).replace('.',',')}</td><td class="right">€ ${o.versand.toFixed(2).replace('.',',')}</td></tr>`:''}
           <tr class="inv-total"><td colspan="4"><strong>Gesamtbetrag</strong></td><td class="right"><strong>€ ${gesamt.toFixed(2).replace('.',',')}</strong></td></tr>
         </tbody></table>

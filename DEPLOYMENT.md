@@ -118,7 +118,7 @@ Ausgabe sollte so aussehen:
 ## Schritt 7: Projekt deployen
 
 ```bash
-npx wrangler pages deploy public
+npx wrangler pages deploy public --branch production
 ```
 
 Beim **ersten Mal** fragt Wrangler:
@@ -182,7 +182,7 @@ Alternativ im Dashboard:
 ## Schritt 10: Nochmal deployen (damit Bindings greifen)
 
 ```bash
-npx wrangler pages deploy public
+npx wrangler pages deploy public --branch production
 ```
 
 ---
@@ -242,7 +242,7 @@ oder online: https://www.whatsmydns.net/#NS/pfadivoels.at
 npm run dev                    # → http://localhost:8788
 
 # Deployen
-npx wrangler pages deploy public
+npx wrangler pages deploy public --branch production
 
 # Datenbank anschauen
 npx wrangler d1 execute baustein-db --remote --command "SELECT * FROM orders"
@@ -279,7 +279,7 @@ Wenn du Texte, Bilder oder Code änderst:
 ```bash
 # Einfach nochmal deployen
 cd baustein-cf
-npx wrangler pages deploy public
+npx wrangler pages deploy public --branch production
 ```
 
 Das wars – Cloudflare ersetzt die alte Version automatisch.

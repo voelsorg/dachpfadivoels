@@ -27,9 +27,9 @@ const FROM_EMAIL = 'baustein@pfadivoels.at';
 const FROM_NAME = 'Pfadis Völs – Bausteinaktion';
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-async function sendMails(env, order, orderId, invoiceToken) {
+async function sendMails(env, order, orderId, invoiceToken, preis) {
   const versand = SHIP_COSTS[order.zustellung] ?? 0;
-  const artTotal = order.anzahl * PRICE;
+  const artTotal = order.anzahl * preis;
   const gesamt = artTotal + versand;
   const nr = 'BA-2026-' + String(orderId).padStart(3, '0');
   const shipLabel = SHIP_LABELS[order.zustellung] || order.zustellung;
@@ -177,22 +177,29 @@ export async function onRequestPost(context) {
     return Response.json({ error: "Ungültige Anfrage" }, { status: 400 });
   }
 
-  const turnstileToken = body['cf-turnstile-response'];
-  if (!turnstileToken) {
-    return Response.json({ error: "CAPTCHA erforderlich" }, { status: 400 });
-  }
-  const turnstileResult = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      secret: env.TURNSTILE_SECRET,
-      response: turnstileToken,
-      remoteip: request.headers.get('CF-Connecting-IP'),
-    }),
-  });
-  const turnstileData = await turnstileResult.json();
-  if (!turnstileData.success) {
-    return Response.json({ error: "CAPTCHA-Überprüfung fehlgeschlagen" }, { status: 403 });
+  // Admin-Erkennung: Bearer Token vorhanden und gültig?
+  const auth = request.headers.get("Authorization");
+  const isAdmin = auth === `Bearer ${env.ADMIN_TOKEN}`;
+
+  if (!isAdmin) {
+    // Öffentliche Bestellung: CAPTCHA erforderlich
+    const turnstileToken = body['cf-turnstile-response'];
+    if (!turnstileToken) {
+      return Response.json({ error: "CAPTCHA erforderlich" }, { status: 400 });
+    }
+    const turnstileResult = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        secret: env.TURNSTILE_SECRET,
+        response: turnstileToken,
+        remoteip: request.headers.get('CF-Connecting-IP'),
+      }),
+    });
+    const turnstileData = await turnstileResult.json();
+    if (!turnstileData.success) {
+      return Response.json({ error: "CAPTCHA-Überprüfung fehlgeschlagen" }, { status: 403 });
+    }
   }
 
   const { vorname, nachname, email, anzahl, zustellung, adresse, land, anmerkung } = body;
@@ -200,8 +207,12 @@ export async function onRequestPost(context) {
   if (!vorname?.trim() || !nachname?.trim()) {
     return Response.json({ error: "Name ist Pflichtfeld" }, { status: 400 });
   }
-  if (!email?.trim() || !EMAIL_REGEX.test(email.trim())) {
+  // E-Mail nur für öffentliche Bestellungen Pflicht
+  if (!isAdmin && (!email?.trim() || !EMAIL_REGEX.test(email.trim()))) {
     return Response.json({ error: "Gültige E-Mail erforderlich" }, { status: 400 });
+  }
+  if (email?.trim() && !EMAIL_REGEX.test(email.trim())) {
+    return Response.json({ error: "Ungültige E-Mail-Adresse" }, { status: 400 });
   }
   const n = parseInt(anzahl);
   if (!n || n < 1 || n > 99) {
@@ -212,28 +223,44 @@ export async function onRequestPost(context) {
     return Response.json({ error: "Ungültige Zustellungsoption" }, { status: 400 });
   }
 
-  const versand = SHIP_COSTS[zustellung] ?? 0;
+  // Preis: Admin kann anpassen (min. 30), öffentlich immer 30
+  let preis = PRICE;
+  if (isAdmin && body.preis !== undefined) {
+    preis = parseFloat(body.preis);
+    if (!preis || preis < PRICE) {
+      return Response.json({ error: `Mindestpreis ist € ${PRICE}` }, { status: 400 });
+    }
+  }
+
+  const versand = isAdmin && body.versand !== undefined
+    ? (parseFloat(body.versand) || 0)
+    : (SHIP_COSTS[zustellung] ?? 0);
   const invoiceToken = crypto.randomUUID();
 
   const result = await env.DB.prepare(
-    `INSERT INTO orders (vorname, nachname, email, anzahl, zustellung, versand, adresse, land, anmerkung, invoice_token)
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
+    `INSERT INTO orders (vorname, nachname, email, anzahl, zustellung, versand, preis, adresse, land, status, anmerkung, invoice_token)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
   )
     .bind(
       vorname.trim(),
       nachname.trim(),
-      email.trim(),
+      email?.trim() || null,
       n,
       zustellung,
       versand,
+      preis,
       adresse?.trim() || null,
       land?.trim() || null,
+      isAdmin ? (body.status || 'offen') : 'offen',
       anmerkung?.trim() || null,
       invoiceToken
     )
     .run();
 
-  context.waitUntil(sendMails(env, body, result.meta.last_row_id, invoiceToken));
+  // E-Mails nur senden wenn E-Mail vorhanden
+  if (email?.trim()) {
+    context.waitUntil(sendMails(env, body, result.meta.last_row_id, invoiceToken, preis));
+  }
 
   return Response.json(
     { ok: true, id: result.meta.last_row_id },

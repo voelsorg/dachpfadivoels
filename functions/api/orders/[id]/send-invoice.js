@@ -33,7 +33,7 @@ export async function onRequestPost(context) {
     return Response.json({ error: "Bitte zuerst Versandkosten eintragen (Bestellung bearbeiten)" }, { status: 400 });
   }
 
-  const artTotal = order.anzahl * PRICE;
+  const artTotal = order.anzahl * (order.preis || PRICE);
   const versand = order.versand || 0;
   const gesamt = artTotal + versand;
   const nr = 'BA-2026-' + String(order.id).padStart(3, '0');

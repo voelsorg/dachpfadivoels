@@ -25,8 +25,16 @@ export async function onRequestPatch(context) {
 
   const allowed = [
     "vorname", "nachname", "email", "anzahl", "zustellung",
-    "versand", "adresse", "land", "status", "anmerkung",
+    "versand", "preis", "adresse", "land", "status", "anmerkung",
   ];
+
+  // Mindestpreis validieren
+  if (body.preis !== undefined) {
+    const p = parseFloat(body.preis);
+    if (!p || p < 30) {
+      return Response.json({ error: "Mindestpreis ist € 30" }, { status: 400 });
+    }
+  }
   const updates = [];
   const values = [];
 

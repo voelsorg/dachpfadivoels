@@ -6,6 +6,7 @@ CREATE TABLE IF NOT EXISTS orders (
   email      TEXT,
   anzahl     INTEGER NOT NULL DEFAULT 1,
   zustellung TEXT    NOT NULL DEFAULT 'versand_at',
+  preis      REAL    NOT NULL DEFAULT 30,
   versand    REAL    DEFAULT 0,
   adresse    TEXT,
   land       TEXT,
