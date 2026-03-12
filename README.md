@@ -1,6 +1,6 @@
 # Bausteinaktion – Pfadfinder*innengruppe Völs
 
-Website und Bestellsystem für die Bausteinaktion der Pfadis Völs: Verkauf von handsignierten Kunstdrucken zur Finanzierung des neuen Pfadiheims.
+Website und Bestellsystem für die Bausteinaktion der Pfadis Völs: Verkauf von handsignierten Kunstdrucken zur Finanzierung des neuen Pfadiheimsdachs.
 
 **Live:** [baustein.pfadivoels.at](https://baustein.pfadivoels.at)
 
