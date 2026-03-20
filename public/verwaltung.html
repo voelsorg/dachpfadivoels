@@ -130,8 +130,8 @@
         <div class="form-group"><label>Anzahl</label><input type="number" id="mAnzahl" min="1" value="1"></div>
         <div class="form-group"><label>Zustellung</label>
           <select id="mZustellung">
-            <option value="versand_at">Versand AT (+ € 5)</option>
-            <option value="versand_eu">Versand EU (+ € 11)</option>
+            <option value="versand_at">Versand AT (+ € 7)</option>
+            <option value="versand_eu">Versand EU (+ € 18)</option>
             <option value="versand_welt">Versand Weltweit</option>
             <option value="abholung">Selbstabholung</option>
           </select>
@@ -140,7 +140,7 @@
       <div class="form-group"><label>Adresse</label><textarea id="mAdresse" placeholder="Straße, PLZ Ort, Land"></textarea></div>
       <div class="modal-row">
         <div class="form-group"><label>Stückpreis (€, min. 30)</label><input type="number" id="mPreis" min="30" step="0.01" value="30"></div>
-        <div class="form-group"><label>Versandkosten (€)</label><input type="number" id="mVersand" min="0" step="0.01" value="5"></div>
+        <div class="form-group"><label>Versandkosten (€)</label><input type="number" id="mVersand" min="0" step="0.01" value="7"></div>
       </div>
       <div class="modal-row">
         <div class="form-group"><label>Status</label>
@@ -157,7 +157,7 @@
   <div class="inv-overlay" id="invoiceOverlay"></div>
   <script>
     const PRICE=30;
-    const SHIP={versand_at:5,versand_eu:11,versand_welt:0,abholung:0};
+    const SHIP={versand_at:7,versand_eu:18,versand_welt:0,abholung:0};
     const SHIP_LABEL={versand_at:'Versand AT',versand_eu:'Versand EU',versand_welt:'Versand Weltweit',abholung:'Selbstabholung'};
     let TOKEN='',orders=[],BANK={};
     function esc(s){if(!s)return '';const d=document.createElement('div');d.textContent=s;return d.innerHTML;}

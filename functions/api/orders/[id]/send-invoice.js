@@ -5,15 +5,15 @@ const FROM_EMAIL = 'baustein@pfadivoels.at';
 const FROM_NAME = 'Pfadis Völs – Bausteinaktion';
 
 const SHIP_LABELS = {
-  versand_at: 'Versand Österreich (€ 5)',
-  versand_eu: 'Versand EU (€ 11)',
+  versand_at: 'Versand Österreich (€ 7)',
+  versand_eu: 'Versand EU (€ 18)',
   versand_welt: 'Versand Weltweit',
   abholung: 'Selbstabholung in Völs',
 };
 
 const SHIP_LABELS_EN = {
-  versand_at: 'Shipping Austria (€ 5)',
-  versand_eu: 'Shipping EU (€ 11)',
+  versand_at: 'Shipping Austria (€ 7)',
+  versand_eu: 'Shipping EU (€ 18)',
   versand_welt: 'Worldwide Shipping',
   abholung: 'Pick-up in Völs',
 };

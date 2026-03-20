@@ -266,8 +266,8 @@
             <div class="form-group">
               <label>Zustellung *</label>
               <div class="radio-group">
-                <div class="radio-option"><input type="radio" id="z_at" name="zustellung" value="versand_at" required><label for="z_at">&#x1F4E6; Versand AT<br><small>+ &euro; 5</small></label></div>
-                <div class="radio-option"><input type="radio" id="z_eu" name="zustellung" value="versand_eu"><label for="z_eu">&#x1F4E6; Versand EU<br><small>+ &euro; 11</small></label></div>
+                <div class="radio-option"><input type="radio" id="z_at" name="zustellung" value="versand_at" required><label for="z_at">&#x1F4E6; Versand AT<br><small>+ &euro; 7</small></label></div>
+                <div class="radio-option"><input type="radio" id="z_eu" name="zustellung" value="versand_eu"><label for="z_eu">&#x1F4E6; Versand EU<br><small>+ &euro; 18</small></label></div>
                 <div class="radio-option"><input type="radio" id="z_welt" name="zustellung" value="versand_welt"><label for="z_welt">&#x1F30D; Weltweit<br><small>auf Anfrage</small></label></div>
                 <div class="radio-option"><input type="radio" id="z_abh" name="zustellung" value="abholung"><label for="z_abh">&#x1F3E0; Abholung<br><small>kostenlos</small></label></div>
               </div>
@@ -319,7 +319,7 @@
     const addressFields = document.getElementById('addressFields');
     const addressInputs = addressFields.querySelectorAll('input');
     const PRICE = 30;
-    const SHIP = { versand_at: 5, versand_eu: 11, versand_welt: null, abholung: 0 };
+    const SHIP = { versand_at: 7, versand_eu: 18, versand_welt: null, abholung: 0 };
     function updateForm() {
       const z = document.querySelector('input[name="zustellung"]:checked');
       const n = parseInt(document.getElementById('anzahl').value) || 0;
