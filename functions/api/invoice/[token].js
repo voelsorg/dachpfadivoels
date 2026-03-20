@@ -6,7 +6,7 @@ export async function onRequestGet(context) {
   if (!token) return Response.json({ error: "Token fehlt" }, { status: 400 });
 
   const row = await env.DB.prepare(
-    "SELECT id, created_at, vorname, nachname, email, anzahl, zustellung, versand, adresse, land, anmerkung FROM orders WHERE invoice_token = ?"
+    "SELECT id, created_at, vorname, nachname, email, anzahl, zustellung, versand, preis, adresse, land, anmerkung FROM orders WHERE invoice_token = ?"
   ).bind(token).first();
 
   if (!row) return Response.json({ error: "Nicht gefunden" }, { status: 404 });
